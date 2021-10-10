@@ -99,10 +99,34 @@ public static class ComputeHelper {
 		}
 	}
 
+	/// Releases supplied render textures/s if not null
+	public static void Release(params RenderTexture[] textures)
+	{
+		for (int i = 0; i < textures.Length; i++)
+		{
+			if (textures[i] != null)
+			{
+				textures[i].Release();
+			}
+		}
+	}
+
+
 	public static Vector3Int GetThreadGroupSizes (ComputeShader compute, int kernelIndex = 0) {
 		uint x, y, z;
 		compute.GetKernelThreadGroupSizes (kernelIndex, out x, out y, out z);
 		return new Vector3Int ((int) x, (int) y, (int) z);
+	}
+
+	public static void CreateRenderTexture(ref RenderTexture texture, RenderTexture template)
+	{
+		if (texture != null)
+		{
+			texture.Release();
+		}
+		texture = new RenderTexture(template.descriptor);
+		texture.enableRandomWrite = true;
+		texture.Create();
 	}
 
 	public static void CreateRenderTexture (ref RenderTexture texture, int size, FilterMode filterMode = FilterMode.Bilinear, GraphicsFormat format = GraphicsFormat.R16G16B16A16_SFloat) {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+[ExecuteAlways]
 public class CelestialBodyGenerator : MonoBehaviour {
 
 	public enum PreviewMode { LOD0, LOD1, LOD2, CollisionRes }
@@ -13,6 +13,7 @@ public class CelestialBodyGenerator : MonoBehaviour {
 
 	public CelestialBodySettings body;
 
+	CloudManager cloudManager;
 	bool debugDoubleUpdate = true;
 	int debug_numUpdates;
 
@@ -41,21 +42,32 @@ public class CelestialBodyGenerator : MonoBehaviour {
 			cam = Camera.main;
 			HandleGameModeGeneration ();
 		}
+		if (cloudManager == null)
+		{
+			cloudManager = FindObjectOfType<CloudManager>();
+		}
 	}
 
 	void Update () {
+
 		if (InEditMode) {
+			cam = Camera.main;
 			HandleEditModeGeneration ();
 		}
+		else if (InGameMode)
+        {
+			HandleEditModeGeneration();
+        }
 
 		if (Input.GetKeyDown (KeyCode.O)) {
 			//body.shading.atmosphereSettings.useOptimVersion = !body.shading.atmosphereSettings.useOptimVersion;
 		}
 
 		if (Input.GetKeyDown (KeyCode.I)) {
-			//	var m = terrainMeshFilter.GetComponent<MeshRenderer> ();
+			//var m = terrainMeshFilter.GetComponent<MeshRenderer> ();
 			//m.enabled = !m.enabled;
 		}
+		transform.Rotate(new Vector3(0, 0, 1), -0.005f);
 	}
 
 	// Handles creation of celestial body when entering game mode
@@ -398,12 +410,13 @@ public class CelestialBodyGenerator : MonoBehaviour {
 	}
 
 	bool CanGenerateMesh () {
-		return ComputeHelper.CanRunEditModeCompute && body.shape && body.shape.heightMapCompute;
+		//return ComputeHelper.CanRunEditModeCompute && body.shape && body.shape.heightMapCompute;
+		return true;
 	}
 
 	void LogTimer (System.Diagnostics.Stopwatch sw, string text) {
 		if (logTimers) {
-			Debug.Log (text + " " + sw.ElapsedMilliseconds + " ms.");
+			//Debug.Log (text + " " + sw.ElapsedMilliseconds + " ms.");
 		}
 	}
 

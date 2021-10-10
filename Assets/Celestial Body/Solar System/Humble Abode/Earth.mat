@@ -175,3 +175,4 @@ Material:
     - _SteepHigh: {r: 0.14901961, g: 0.06666667, b: 0, a: 1}
     - _SteepLow: {r: 0.5294118, g: 0.49019608, b: 0.1882353, a: 1}
     - _TestParams: {r: -0.36, g: -0.05, b: 0.38, a: 0}
+  m_BuildTextureStacks: []

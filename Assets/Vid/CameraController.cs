@@ -40,6 +40,7 @@ public class CameraController : MonoBehaviour {
 
 		UpdateRotation ();
 		UpdateZoom ();
+		//transform.Rotate(new Vector3(0, 0, 1), 1f);
 	}
 
 	void HandleRotationInput (Vector2 mouseInput) {

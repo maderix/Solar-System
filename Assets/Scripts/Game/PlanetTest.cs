@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+[ExecuteAlways]
 public class PlanetTest : MonoBehaviour {
 	public bool useRadius;
 	public float radius;
@@ -35,7 +35,7 @@ public class PlanetTest : MonoBehaviour {
 			}
 			if (sun) {
 				sun.gameObject.SetActive (true);
-				testLight.gameObject.SetActive (false);
+				//testLight.gameObject.SetActive (false);
 			}
 			bodies = FindObjectsOfType<CelestialBodyGenerator> ();
 		}

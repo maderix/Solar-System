@@ -2,6 +2,7 @@
 using UnityEngine;
 using static UnityEngine.Vector3;
 
+
 public class SphereMesh {
 
 	public readonly Vector3[] Vertices;
